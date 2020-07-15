@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ICounter} from "./counter";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,16 @@ export class AppComponent {
   closed;
   isDemi;
 
-  constructor(private _http: HttpClient) {
+  shareOpened = true;
+
+  constructor(
+    private _http: HttpClient,
+    private _route: ActivatedRoute
+  ) {
+    this._route.queryParams.subscribe(params => {
+      this.shareOpened = !(params.app !== undefined && params.app === 'true');
+    });
+
     this.generateLastHoraires(() => {
       this.getInformations(() => {
         setInterval(() => {
@@ -26,8 +36,6 @@ export class AppComponent {
       });
     });
   }
-
-  ngOnInit() {}
 
   generateLastHoraires(callback?) {
     const date = new Date();

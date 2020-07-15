@@ -1,19 +1,21 @@
-  <div title="Actualiser les informations" (click)="getInformations()" id="reload">{{ lastReload }}s</div>
-  <div id="app">
-    <div id="box">
-      <h1 *ngIf="!closed">{{ directCounter }}/200</h1>
-      <h1 *ngIf="closed">Fermé</h1>
-      <h2 *ngIf="!closed">personne<span *ngIf="directCounter > 1">s</span> en ce moment</h2>
-      <div id="infos">
-        <div *ngFor="let h of horaires" class="info">
-          <h3>{{ h.label }}</h3>
-          <h4>{{ h.nombre }} personne<span *ngIf="h.nombre > 1">s</span></h4>
-        </div>
+<div title="Actualiser les informations" (click)="getInformations()" id="reload">{{ lastReload }}s</div>
+<div id="app">
+  <div id="box">
+    <h1 *ngIf="!closed">{{ directCounter }}/200</h1>
+    <h1 *ngIf="closed">Fermé</h1>
+    <h2 *ngIf="!closed">personne<span *ngIf="directCounter > 1">s</span> en ce moment</h2>
+    <div id="infos">
+      <div *ngFor="let h of horaires" class="info">
+        <h3>{{ h.label }}</h3>
+        <h4>{{ h.nombre }} personne<span *ngIf="h.nombre > 1">s</span></h4>
       </div>
-      <a target="_blank" href="https://onair-fitness.fr/club/beziers/" id="statut">
-        <div id="logo"></div>
-        <span id="desc">ON AIR Béziers</span>
-      </a>
-      <a target="_blank" href="https://thomascauquil.fr" id="copyright">Thomas Cauquil</a>
     </div>
+    <a target="_blank" href="https://onair-fitness.fr/club/beziers/" id="statut">
+      <div id="logo"></div>
+      <span id="desc">ON AIR Béziers</span>
+    </a>
+    <a target="_blank" href="https://thomascauquil.fr" id="copyright">Thomas Cauquil</a>
   </div>
+</div>
+
+<app-share *ngIf="shareOpened" (onClose)="shareOpened = false"></app-share>

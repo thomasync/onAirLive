@@ -1,0 +1,61 @@
+#popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.7);
+  z-index: 100;
+  #box {
+    padding: 40px;
+    width: calc(100% - 120px);
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,.2);
+    background: white;
+    #qrcode {
+      width: 200px;
+      height: 200px;
+      background: url(../../assets/qrcode.png) no-repeat center;
+      background-size: 100%;
+      margin: 0 auto;
+    }
+    span {
+      display: block;
+      text-align: center;
+      color: #d52e28;
+      font-size: 16px;
+    }
+    .sprt {
+      width: 100px;
+      height: 1px;
+      background: #d52e28;
+      margin: 20px auto;
+    }
+    #install {
+      display: block;
+      text-decoration: none;
+      background: #d52e28;
+      color: white;
+      padding: 10px;
+      margin: 0 auto 20px auto;
+      text-align: center;
+      transition: opacity .2s ease;
+      &:hover {
+        cursor: pointer;
+        opacity: .8;
+      }
+    }
+    #skip {
+      color: #d52e28;
+      text-align: center;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}
