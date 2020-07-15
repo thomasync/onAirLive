@@ -28,12 +28,10 @@ export class AppComponent {
       this.shareOpened = !(params.app !== undefined && params.app === 'true');
     });
 
-    this.generateLastHoraires(() => {
-      this.getInformations(() => {
-        setInterval(() => {
-          this.actualiseLastReload();
-        }, 1000);
-      });
+    this.getInformations(() => {
+      setInterval(() => {
+        this.actualiseLastReload();
+      }, 1000);
     });
   }
 
@@ -61,36 +59,38 @@ export class AppComponent {
   }
 
   getInformations(callback?) {
-    this._http.get(this.urlApi, { responseType: 'text' }).subscribe((html) => {
-      this.directCounter = +html.match(/<div class="attendance">(\d+)\s/si)[1];
+    this.generateLastHoraires(() => {
+      this._http.get(this.urlApi, {responseType: 'text'}).subscribe((html) => {
+        this.directCounter = +html.match(/<div class="attendance">(\d+)\s/si)[1];
 
-      const matchDatasets = html.match(/.*datasets: \[(.*?)options:/si)[1];
-      const matchDatas = matchDatasets.match(/data: (\[.*?\])/gs);
+        const matchDatasets = html.match(/.*datasets: \[(.*?)options:/si)[1];
+        const matchDatas = matchDatasets.match(/data: (\[.*?\])/gs);
 
-      const hours = JSON.parse(matchDatas[1].replace('data: ', '')).reverse();
-      const hoursDemi = JSON.parse(matchDatas[0].replace('data: ', '')).reverse();
+        const hours = JSON.parse(matchDatas[1].replace('data: ', '')).reverse();
+        const hoursDemi = JSON.parse(matchDatas[0].replace('data: ', '')).reverse();
 
-      let index = 0;
-      hoursDemi.forEach((e) => {
-        hours.splice(index, 0, e);
-        index += 2;
+        let index = 0;
+        hoursDemi.forEach((e) => {
+          hours.splice(index, 0, e);
+          index += 2;
+        });
+
+        index = (!this.isDemi) ? 1 : 0;
+        this.horaires.forEach((e) => {
+          e.nombre = hours[index];
+          index += 1;
+        });
+
+      }, () => {
+        alert('Une erreur est survenue');
       });
 
-      index = (!this.isDemi) ? 1 : 0;
-      this.horaires.forEach((e) => {
-        e.nombre = hours[index];
-        index += 1;
-      });
-
-    }, () => {
-      alert('Une erreur est survenue');
+      this.lastReloadTimestamp = Date.now();
+      this.actualiseLastReload();
+      if (callback) {
+        callback();
+      }
     });
-
-    this.lastReloadTimestamp = Date.now();
-    this.actualiseLastReload();
-    if (callback) {
-      callback();
-    }
   }
 
   actualiseLastReload() {
