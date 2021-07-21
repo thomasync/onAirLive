@@ -12,6 +12,7 @@ export class AppComponent {
 
   urlApi = 'https://api.resamania.com/onair/public/attendances/qDf9-6Gnm-8Hoa-18xs';
   directCounter = 0;
+  limitCounter = 0;
   lastReload = 9;
   lastReloadTimestamp = 0;
   horaires: ICounter[] = [];
@@ -61,7 +62,12 @@ export class AppComponent {
   getInformations(callback?) {
     this.generateLastHoraires(() => {
       this._http.get(this.urlApi, {responseType: 'text'}).subscribe((html) => {
-        this.directCounter = +html.match(/<div class="attendance">(\d+)\s/si)[1];
+        this.directCounter = +html.match(/<div class="attendance">.*?<span class="value">(\d+)<\/span>/si)[1];
+        try {
+          this.limitCounter = +html.match(/let limit = (\d+)(;|)\s/si)[1];
+        } catch (e) {
+          this.limitCounter = 49;
+        }
 
         const matchDatasets = html.match(/.*datasets: \[(.*?)options:/si)[1];
         const matchDatas = matchDatasets.match(/data: (\[.*?\])/gs);

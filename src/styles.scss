@@ -5,3 +5,13 @@
   font-family: 'Poppins', 'Helvetica', Arial, sans-serif;
   color: white
 }
+
+html, body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  background: #d52e28;
+}

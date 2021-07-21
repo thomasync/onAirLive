@@ -1,7 +1,7 @@
 <div title="Actualiser les informations" (click)="getInformations()" id="reload">{{ lastReload }}s</div>
 <div id="app">
   <div id="box">
-    <h1 *ngIf="!closed">{{ directCounter }}/200</h1>
+    <h1 *ngIf="!closed">{{ directCounter }}/{{ limitCounter }}</h1>
     <h1 *ngIf="closed">Fermé</h1>
     <h2 *ngIf="!closed">personne<span *ngIf="directCounter > 1">s</span> en ce moment</h2>
     <div id="infos">
