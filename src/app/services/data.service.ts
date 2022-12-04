@@ -106,10 +106,6 @@ export class DataService {
 		});
 	}
 
-	get firstOpen(): boolean {
-		return window.localStorage.getItem('place') === null;
-	}
-
 	get placeSelected(): IPlace {
 		const placeIndex = window.localStorage.getItem('place');
 		if (placeIndex) {

@@ -21,8 +21,9 @@
 				</option>
 			</select>
 			<div class="sprt"></div>
-			<a *ngIf="isIOS" href="/install" id="install">Installer l'application</a>
-			<div (click)="close()" id="skip">Continuer sur le site</div>
+			<a *ngIf="config.isIOS && !config.isApplication" href="/install" id="install">Installer l'application</a>
+			<div (click)="close()" *ngIf="!config.isApplication" id="skip">Continuer sur le site</div>
+			<div (click)="close()" *ngIf="config.isApplication" id="skip">Changer de salle</div>
 		</div>
 	</div>
 </ng-container>

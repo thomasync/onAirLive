@@ -11,9 +11,6 @@ import { DataService } from 'src/app/services/data.service';
 export class ShareComponent {
 	@Output() onClose = new EventEmitter();
 
-	isIOS: boolean = /iPad|iPhone|iPod/.test(navigator.platform || '');
-	isAndroid: boolean = /android/i.test(navigator.platform || '');
-
 	constructor(public data: DataService, public config: ConfigService) {}
 
 	close(): void {

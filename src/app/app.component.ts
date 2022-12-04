@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ConfigService } from './services/config.service';
 import { DataService } from './services/data.service';
 
@@ -9,24 +8,23 @@ import { DataService } from './services/data.service';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit {
-	shareOpened: boolean = true;
+	shareOpened: boolean = false;
 	isClosed: boolean = false;
 
 	constructor(
 		public data: DataService,
 		public config: ConfigService,
-		private _route: ActivatedRoute
-	) {
-		this._route.queryParams.subscribe((params) => {
-			this.shareOpened = !(params.app !== undefined && params.app === 'true') || this.data.firstOpen;
-		});
-	}
+	) {}
 
 	async ngOnInit(): Promise<void> {
-		this.data.getInformations();
+		await this.data.getInformations();
+    this.actualiseLastReload()
 	}
 
   ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.shareOpened = !this.config.isApplication || this.config.isFirstOpen;
+    }, 100);
     setInterval(() => this.actualiseLastReload(), 1000);
   }
 
