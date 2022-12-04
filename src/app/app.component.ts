@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigService } from './services/config.service';
 import { DataService } from './services/data.service';
@@ -8,7 +8,7 @@ import { DataService } from './services/data.service';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 	shareOpened: boolean = true;
 	isClosed: boolean = false;
 
@@ -23,15 +23,19 @@ export class AppComponent implements OnInit {
 	}
 
 	async ngOnInit(): Promise<void> {
-		await this.data.getInformations();
-		setInterval(() => this.actualiseLastReload(), 1000);
+		this.data.getInformations();
 	}
+
+  ngAfterViewInit(): void {
+    setInterval(() => this.actualiseLastReload(), 1000);
+  }
 
 	actualiseLastReload(): void {
 		const date = new Date();
-		this.data.lastReload = 9 - Math.floor((Date.now() - this.data.lastReloadTimestamp) / 1000);
+    const deltaLastReload = 9 - Math.floor((Date.now() - this.data.lastReloadTimestamp) / 1000);
+		this.data.lastReload = deltaLastReload < 1 ? 1 : deltaLastReload;
 		this.isClosed = date.getHours() < 7 || date.getHours() >= 22;
-		if (this.data.lastReload < 0) {
+		if (this.data.lastReload <= 1) {
 			this.data.getInformations();
 		}
 	}

@@ -33,6 +33,8 @@ export class DataService {
 		},
 	];
 
+	inFetching = false;
+
 	constructor(private _http: HttpClient) {}
 
 	async generateLastHoraires(): Promise<void> {
@@ -61,6 +63,11 @@ export class DataService {
 	async getInformations(): Promise<void> {
 		this.lastReloadTimestamp = Date.now();
 		return new Promise(async (resolve) => {
+			if (this.inFetching) {
+				resolve();
+				return;
+			}
+			this.inFetching = true;
 			await this.generateLastHoraires();
 			this._http
 				.get(this.placeSelected.url, { responseType: 'text' })
@@ -71,7 +78,7 @@ export class DataService {
 					try {
 						this.limitCounter = +html.match(/let limit = (\d+)(;|)\s/is)[1];
 					} catch (e) {
-						this.limitCounter = 49;
+						this.limitCounter = 99;
 					}
 
 					const matchDatasets = html.match(/.*datasets: \[(.*?)options:/is)[1];
@@ -94,6 +101,7 @@ export class DataService {
 						index += 1;
 					});
 				});
+			this.inFetching = false;
 			resolve();
 		});
 	}
