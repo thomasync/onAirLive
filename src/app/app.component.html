@@ -1,21 +1,33 @@
-<div title="Actualiser les informations" (click)="getInformations()" id="reload">{{ lastReload }}s</div>
-<div id="app">
-  <div id="box">
-    <h1 *ngIf="!closed">{{ directCounter }}/{{ limitCounter }}</h1>
-    <h1 *ngIf="closed">Fermé</h1>
-    <h2 *ngIf="!closed">personne<span *ngIf="directCounter > 1">s</span> en ce moment</h2>
-    <div id="infos">
-      <div *ngFor="let h of horaires" class="info">
-        <h3>{{ h.label }}</h3>
-        <h4>{{ h.nombre }} personne<span *ngIf="h.nombre > 1">s</span></h4>
-      </div>
-    </div>
-    <a target="_blank" href="https://onair-fitness.fr/club/beziers/" id="statut">
-      <div id="logo"></div>
-      <span id="desc">ON AIR Béziers</span>
-    </a>
-    <a target="_blank" href="https://thomascauquil.fr" id="copyright">Thomas Cauquil</a>
-  </div>
+<div
+	title="Actualiser les informations"
+	(click)="data.getInformations()"
+	id="reload"
+>
+	{{ data.lastReload }}s
+</div>
+<div id="app" [style.backgroundColor]="config.themeColor">
+	<div id="box">
+		<h1 *ngIf="isClosed">Fermé</h1>
+		<ng-container *ngIf="!isClosed">
+			<h1>{{ data.directCounter }}/{{ data.limitCounter }}</h1>
+			<h2>personne<span *ngIf="data.directCounter > 1">s</span> en ce moment</h2>
+		</ng-container>
+		<div id="infos">
+			<div *ngFor="let horaire of data.horaires" class="info">
+				<h3>{{ horaire.label }}</h3>
+				<h4>
+					{{ horaire.nombre }} personne<span *ngIf="horaire.nombre > 1">s</span>
+				</h4>
+			</div>
+		</div>
+		<a (click)="shareOpened = true" id="place">
+			<div id="logo"></div>
+			<span id="desc">{{ data.placeSelected.label }}</span>
+		</a>
+		<a target="_blank" href="https://thomascauquil.fr" id="copyright"
+			>Thomas Cauquil</a
+		>
+	</div>
 </div>
 
-<app-share *ngIf="shareOpened" (onClose)="shareOpened = false"></app-share>
+<app-share *ngIf="shareOpened" (onClose)="shareClosed()"></app-share>

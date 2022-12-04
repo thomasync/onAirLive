@@ -1,0 +1,28 @@
+<ng-container>
+	<div id="popup">
+		<div id="box">
+			<div id="themes">
+				<div
+					(click)="config.setTheme(themeIndex)"
+					class="theme"
+					[style.backgroundColor]="theme"
+					*ngFor="let theme of config.themes; let themeIndex = index"
+				></div>
+			</div>
+			<div id="qrcode"></div>
+			<span>Partagez cette page en scannant ce qrcode</span>
+			<select id="places" (change)="placeChanged($event.target.value)">
+				<option
+					[value]="placeIndex"
+					[selected]="place === data.placeSelected"
+					*ngFor="let place of data.places; let placeIndex = index"
+				>
+					{{ place.nom }}
+				</option>
+			</select>
+			<div class="sprt"></div>
+			<a *ngIf="isIOS" href="/install" id="install">Installer l'application</a>
+			<div (click)="close()" id="skip">Continuer sur le site</div>
+		</div>
+	</div>
+</ng-container>

@@ -1,102 +1,102 @@
-
 #reload {
-  position: fixed;
-  top: 40px;
-  left: 5%;
-  color: rgba(255,255,255,.4);
-  z-index: 5;
-  transition: color .2s ease;
-  font-size: clamp(16px, 4vw, 30px);
-  cursor: pointer;
-  &:hover {
-    color: rgba(255,255,255,.3);
-  }
-  &:active {
-    color: rgba(255,255,255,.2);
-  }
+	position: fixed;
+	top: 40px;
+	left: 5%;
+	color: rgba(255, 255, 255, 0.4);
+	z-index: 5;
+	transition: color 0.2s ease;
+	font-size: clamp(16px, 4vw, 30px);
+	cursor: pointer;
+	&:hover {
+		color: rgba(255, 255, 255, 0.3);
+	}
+	&:active {
+		color: rgba(255, 255, 255, 0.2);
+	}
 }
 #app {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  padding: 20px;
-  background: #d52e28;
-  #box {
-    text-align: center;
-    h1 {
-      font-weight: bold;
-      font-size: clamp(20px, 20vw, 200px);
-      margin: 0;
-      padding: 0;
-    }
-    h2 {
-      font-weight: 200;
-      font-size: clamp(16px, 4vw, 100px);
-      margin: 0;
-      padding: 0;
-    }
-    #infos {
-      margin-top: 20px;
-      border-top: 1px solid white;
-      .info {
-        display: flex;
-        padding-top: 10px;
-        h3 {
-          margin: 0;
-          width: 150px;
-          font-size: clamp(12px, 4vw, 20px);
-          text-align: left;
-          font-weight: bold;
-        }
-        h4 {
-          margin: 0;
-          width: 100%;
-          text-align: right;
-          font-size: clamp(12px, 4vw, 20px);
-          font-weight: 300;
-        }
-      }
-    }
-    #statut {
-      display: flex;
-      margin: 20px auto 15px auto;
-      width: 180px;
-      text-align: center;
-      text-decoration: none;
-      color: white;
-      #logo {
-        width: 50px;
-        height: 50px;
-        background: url(../assets/onairlogo.jpg) no-repeat center;
-        background-size: 100%;
-        margin-right: 10px;
-      }
-      #desc {
-        display: block;
-        height: 50px;
-        font-weight: bold;
-        line-height: 50px;
-      }
-    }
-    #copyright {
-      background-color: rgba(255,255,255,.1);
-      color: white;
-      padding: 10px;
-      letter-spacing: 3px;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color .2s ease;
-      &:hover {
-        background-color: rgba(255,255,255,.04);
-      }
-      &:active {
-        background-color: rgba(255,255,255,0);
-      }
-    }
-  }
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	padding: 20px;
+	background: #d52e28;
+	#box {
+		text-align: center;
+		h1 {
+			font-weight: bold;
+			font-size: clamp(20px, 20vw, 200px);
+			margin: 0;
+			padding: 0;
+		}
+		h2 {
+			font-weight: 200;
+			font-size: clamp(16px, 4vw, 100px);
+			margin: 0;
+			padding: 0;
+		}
+		#infos {
+			margin-top: 20px;
+			border-top: 1px solid white;
+			.info {
+				display: flex;
+				padding-top: 10px;
+				h3 {
+					margin: 0;
+					width: 150px;
+					font-size: clamp(12px, 4vw, 20px);
+					text-align: left;
+					font-weight: bold;
+				}
+				h4 {
+					margin: 0;
+					width: 100%;
+					text-align: right;
+					font-size: clamp(12px, 4vw, 20px);
+					font-weight: 300;
+				}
+			}
+		}
+		#place {
+			display: flex;
+			margin: 20px auto 15px auto;
+			width: 220px;
+			text-align: center;
+			text-decoration: none;
+			color: white;
+			cursor: pointer;
+			#logo {
+				width: 50px;
+				height: 50px;
+				background: url(../assets/onairlogo.png) no-repeat center;
+				background-size: 100%;
+				margin-right: 10px;
+			}
+			#desc {
+				display: block;
+				height: 50px;
+				font-weight: bold;
+				line-height: 50px;
+			}
+		}
+		#copyright {
+			background-color: rgba(255, 255, 255, 0.1);
+			color: white;
+			padding: 10px;
+			letter-spacing: 3px;
+			border-radius: 5px;
+			text-decoration: none;
+			transition: background-color 0.2s ease;
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.04);
+			}
+			&:active {
+				background-color: rgba(255, 255, 255, 0);
+			}
+		}
+	}
 }
